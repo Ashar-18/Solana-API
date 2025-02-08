@@ -15,7 +15,7 @@ const SolanaTransactions = () => {
         if (!mint) return;
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:5000/transactions?mint=${mint}`);
+            const response = await fetch(`https://solanatransactionss-8ada5d60a902.herokuapp.com/transactions?mint=${mint}`);
             const result = await response.json();
             const formattedData = Object.keys(result).map(hour => ({
                 hour,
