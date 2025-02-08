@@ -1,0 +1,13 @@
+.mainCont{
+  width: 100%;
+  height: auto;
+  text-align: center;
+  margin: 80px auto;
+}
+
+.result{
+  padding: 20px;
+  margin: 20px;
+  background-color: rgb(233, 232, 232);
+  border-radius: 20px;
+}
