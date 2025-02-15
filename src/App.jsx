@@ -99,7 +99,7 @@ const SolanaTransactions = () => {
                 {status}
             </Typography>
 
-            {tokenInfo && (
+            {/* {tokenInfo && (
                 <Box sx={{ marginTop: "50px", backgroundColor: "#f4f4f4", padding: "20px", borderRadius: "8px" }}>
                     <Typography variant="h6" fontWeight="bold" sx={{ color: "#333" }}>
                         Token Information
@@ -107,7 +107,7 @@ const SolanaTransactions = () => {
                     <Typography><b>Name:</b> {tokenInfo.name}</Typography>
                     <Typography><b>Description:</b> {tokenInfo.description}</Typography>
                 </Box>
-            )}
+            )} */}
 
             {marketData && (
                 <Box sx={{ marginTop: "20px", backgroundColor: "#f4f4f4", padding: "20px", borderRadius: "8px" }}>
