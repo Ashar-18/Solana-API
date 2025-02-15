@@ -12,6 +12,8 @@ const SolanaTransactions = () => {
     const [loading, setLoading] = useState(false);
     const [requestId, setRequestId] = useState(null);
     const [status, setStatus] = useState("");
+    const [tokenInfo, setTokenInfo] = useState(null);
+    const [marketData, setMarketData] = useState(null);
 
     const fetchTransactions = async () => {
         if (!mint) return;
@@ -48,12 +50,16 @@ const SolanaTransactions = () => {
                     clearInterval(interval); // Stop polling
                     setStatus("Data Loaded");
 
-                    // Format the data
+                    // Format the transaction data
                     const formattedData = Object.keys(statusResult.data).map(hour => ({
                         hour,
                         count: statusResult.data[hour]
                     }));
                     setData(formattedData);
+
+                    // Store token information
+                    setTokenInfo(statusResult.tokenInfo);
+                    setMarketData(statusResult.marketData);
                 } else {
                     setStatus("Still Processing...");
                 }
@@ -92,6 +98,27 @@ const SolanaTransactions = () => {
             <Typography variant="h6" sx={{ marginTop: "20px", color: "gray" }}>
                 {status}
             </Typography>
+
+            {tokenInfo && (
+                <Box sx={{ marginTop: "50px", backgroundColor: "#f4f4f4", padding: "20px", borderRadius: "8px" }}>
+                    <Typography variant="h6" fontWeight="bold" sx={{ color: "#333" }}>
+                        Token Information
+                    </Typography>
+                    <Typography><b>Name:</b> {tokenInfo.name}</Typography>
+                    <Typography><b>Description:</b> {tokenInfo.description}</Typography>
+                </Box>
+            )}
+
+            {marketData && (
+                <Box sx={{ marginTop: "20px", backgroundColor: "#f4f4f4", padding: "20px", borderRadius: "8px" }}>
+                    <Typography variant="h6" fontWeight="bold" sx={{ color: "#333" }}>
+                        Market Data
+                    </Typography>
+                    <Typography><b>Average Market Cap:</b> ${marketData.avgMarketCap.toFixed(2)}</Typography>
+                    <Typography><b>All-Time High (ATH):</b> ${marketData.highestPrice.toFixed(2)} at {marketData.highestPriceTime}</Typography>
+                    <Typography><b>Hour with Highest Volume:</b> {marketData.highestVolumeTime}</Typography>
+                </Box>
+            )}
 
             {data.length > 0 && (
                 <>
